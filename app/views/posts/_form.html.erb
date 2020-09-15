@@ -1,1 +1,22 @@
+<h1>Create a New Post!</h1>
 
+<%= form_for @post do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
+
+    <%= f.label :content %>
+    <%= f.text_area :content %><br>
+
+   
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
+    
+    <%= f.fields_for :categories, post.categories.build do |categories_fields| %>
+        <%= f.label 'New Category' %>
+        <%= categories_fields.text_field :name %>
+    <% end %><br>
+    
+    <%= f.submit %>
+<% end %>
+
+<!-- so I have created this form which outputs: -->
+<!-- <input type="checkbox" value="1" name="post[category_ids][]" id="post_category_ids_1"> -->
